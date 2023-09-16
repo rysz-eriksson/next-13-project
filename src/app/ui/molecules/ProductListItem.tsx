@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { ProductCoverImage } from "../atoms/ProductCoverImage"
 import { ProductListItemDescription } from "../atoms/ProductListItemDescription"
 import { type ProductItem } from "../types"
@@ -7,24 +8,26 @@ type ProductListItemProps = {
 }
 
 export const ProductListItem = (
-    {product: {name, category, price, coverImage}}: ProductListItemProps) => {
+    {product: {id, name, category, price, coverImage}}: ProductListItemProps) => {
     return (
         <li>
             <article>
-                <ProductCoverImage
-                    dimensions={{
-                        width: 320,
-                        height: 320
-                    }}
-                    imageSettings={coverImage} 
-                />
-                <ProductListItemDescription 
-                    product={{
-                        category,
-                        name,
-                        price
-                    }}
-                />
+                <Link href={`/product/${id}`}>
+                    <ProductCoverImage
+                        dimensions={{
+                            width: 320,
+                            height: 320
+                        }}
+                        imageSettings={coverImage} 
+                    />
+                    <ProductListItemDescription 
+                        product={{
+                            category,
+                            name,
+                            price
+                        }}
+                    />
+                </Link>
             </article>
         </li>
     )

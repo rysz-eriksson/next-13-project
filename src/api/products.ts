@@ -1,4 +1,6 @@
-import type { ProductItem } from "../ui/types";
+import type { ProductItem } from "../app/ui/types";
+
+const PRODUCTS_API_URL = "https://naszsklep-api.vercel.app/api/products";
 
 type ProductResponseItem = {
     id: string;
@@ -23,14 +25,20 @@ const mapProductResponseToProductItem = (productResponse: ProductResponseItem): 
     }
 }
 
-export const getProducts = async (paginarion?: {size: number, offset: number}) => {
-    const res = await fetch(`https://naszsklep-api.vercel.app/api/products?take=${paginarion?.size}&offset=${paginarion?.offset}`);
+export const getProducts = async (pagination?: {size: number, offset: number}) => {
+    const res = await fetch(`${PRODUCTS_API_URL}?take=${pagination?.size}&offset=${pagination?.offset}`);
     const productsResponse = (await res.json() as ProductResponseItem[]);
     return productsResponse.map(mapProductResponseToProductItem);
 }
 
+export const getProductsCount = async () => {
+    const res = await fetch(`${PRODUCTS_API_URL}`);
+    const productsResponse = (await res.json() as ProductResponseItem[]);
+    return productsResponse.length;
+}
+
 export const getProductById = async (id: ProductResponseItem["id"]) => {
-    const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${id}`);
+    const res = await fetch(`${PRODUCTS_API_URL}/${id}`);
     const productResponse = (await res.json() as ProductResponseItem);
     return mapProductResponseToProductItem(productResponse);
 }

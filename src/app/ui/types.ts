@@ -9,3 +9,8 @@ export type ProductItem = {
     };
     description: string;
 }
+
+export type PaginationSettings = {
+    size: number;
+    offset: number;
+}

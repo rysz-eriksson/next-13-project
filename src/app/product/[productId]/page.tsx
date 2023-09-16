@@ -1,4 +1,4 @@
-import { getProductById } from "@/app/api/products"
+import { getProductById } from "@/api/products"
 import { ProductPageItem } from "@/app/ui/molecules/ProductPageItem"
 
 export default async function ProductPage({params}: {params: {productId: string}}) {
