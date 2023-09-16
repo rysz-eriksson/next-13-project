@@ -1,4 +1,4 @@
-import { ProductListItemCoverImage } from "../atoms/ProductListItemCoverImage"
+import { ProductCoverImage } from "../atoms/ProductCoverImage"
 import { ProductListItemDescription } from "../atoms/ProductListItemDescription"
 import { type ProductItem } from "../types"
 
@@ -11,7 +11,13 @@ export const ProductListItem = (
     return (
         <li>
             <article>
-                <ProductListItemCoverImage {...coverImage} />
+                <ProductCoverImage
+                    dimensions={{
+                        width: 320,
+                        height: 320
+                    }}
+                    imageSettings={coverImage} 
+                />
                 <ProductListItemDescription 
                     product={{
                         category,
