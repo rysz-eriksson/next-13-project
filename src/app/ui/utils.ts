@@ -19,3 +19,11 @@ export const computePaginationSettings = (currentPage: number): PaginationSettin
         offset
     }
 }
+
+export const generateProductPagesList = (numberOfPages: number) => {
+    const result = [];
+    for (let i = 1; i <= numberOfPages; i++) {
+      result.push(i.toString());
+    }
+    return result
+};

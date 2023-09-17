@@ -1,3 +1,4 @@
+import type { Route } from "next"
 import { ActiveLink } from "../atoms/ActiveLink"
 
 export const NavBar = () => {
@@ -9,7 +10,7 @@ export const NavBar = () => {
         },
         {
             name: "All",
-            href: "/",
+            href: "/products",
             exact: false
         }
     ]
@@ -19,10 +20,10 @@ export const NavBar = () => {
       {links.map(link => (
         <li key={link.name} className="mx-4">
           <ActiveLink 
-          className="text-blue-400 hover:text-blue-600"
-          activeClassName="underline"
-          href={link.href}
-          exact={link.exact}
+            className="text-blue-400 hover:text-blue-600"
+            activeClassName="underline"
+            href={(link.href) as Route}
+            exact={link.exact}
           >
             {link.name}
           </ActiveLink>

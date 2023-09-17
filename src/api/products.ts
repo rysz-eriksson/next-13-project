@@ -1,4 +1,5 @@
 import type { ProductItem } from "../app/ui/types";
+import { NUMBER_OF_PPRODUCTS } from "@/app/ui/constants";
 
 const PRODUCTS_API_URL = "https://naszsklep-api.vercel.app/api/products";
 
@@ -32,9 +33,10 @@ export const getProducts = async (pagination?: {size: number, offset: number}) =
 }
 
 export const getProductsCount = async () => {
-    const res = await fetch(`${PRODUCTS_API_URL}`);
-    const productsResponse = (await res.json() as ProductResponseItem[]);
-    return productsResponse.length;
+    return NUMBER_OF_PPRODUCTS
+    // const res = await fetch(`${PRODUCTS_API_URL}`);
+    // const productsResponse = (await res.json() as ProductResponseItem[]);
+    // return productsResponse.length;
 }
 
 export const getProductById = async (id: ProductResponseItem["id"]) => {
