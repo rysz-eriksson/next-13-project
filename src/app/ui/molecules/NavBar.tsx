@@ -1,16 +1,36 @@
 import { ActiveLink } from "../atoms/ActiveLink"
 
 export const NavBar = () => {
+    const links = [
+        {
+            name: "Home",
+            href: "/",
+            exact: true
+        },
+        {
+            name: "All",
+            href: "/",
+            exact: false
+        }
+    ]
     return (
     <nav className="h-16 flex justify-center align-middle">
     <ul className="w-auto flex">
-      <li className="mx-4">
-        <ActiveLink href="/">Home</ActiveLink>
-      </li>
-      <li>
-        <ActiveLink href="/products">Products</ActiveLink>
-      </li>
+      {links.map(link => (
+        <li key={link.name} className="mx-4">
+          <ActiveLink 
+          className="text-blue-400 hover:text-blue-600"
+          activeClassName="underline"
+          href={link.href}
+          exact={link.exact}
+          >
+            {link.name}
+          </ActiveLink>
+        </li>
+      ))}
     </ul>
   </nav>
   )
 }
+
+// `text-blue-400 hover:text-blue-600` underline

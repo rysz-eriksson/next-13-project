@@ -12,8 +12,8 @@ export const ProductPageItem = ({ product }: ProductPageItemProps) => {
         <article className="flex m-auto gap-6">
             <ProductCoverImage 
                 dimensions={{
-                    width: 500,
-                    height: 500
+                    width: 480,
+                    height: 480
                 }}
                 imageSettings={coverImage}
             />
