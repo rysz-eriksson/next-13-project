@@ -3,7 +3,7 @@ import { computeNumberOfProductsPages, generateProductPagesList } from "../utils
 import { ActiveLink } from "../atoms/ActiveLink";
 
 type PagnationProps = {
-    current: number;
+    current: string;
     total: number;
     pageSize: number;
 }
@@ -22,7 +22,7 @@ export const Pagination = (props: PagnationProps) => {
                 className="text-blue-400 hover:text-blue-600"
                 activeClassName="underline"
                 href={(`/products/${pageId}`) as Route}
-                forceActive={current.toString() === pageId}
+                forceActive={current === pageId}
             >
                 {pageId}
             </ActiveLink>
