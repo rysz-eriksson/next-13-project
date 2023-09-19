@@ -2,7 +2,7 @@ import { type ProductItem } from "../types"
 import { formatPrice } from "../utils"
 
 type ProductListItemDescriptionProps = {
-    product: Omit<ProductItem, "coverImage" | "id">
+    product: Pick<ProductItem, "name" | "category" |"price">
 }
 
 export const ProductListItemDescription = (
