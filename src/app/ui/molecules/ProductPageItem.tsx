@@ -10,13 +10,15 @@ export const ProductPageItem = ({ product }: ProductPageItemProps) => {
     const { name, category, price, description, coverImage } = product
     return (
         <article className="flex m-auto gap-6">
-            <ProductCoverImage 
-                dimensions={{
-                    width: 480,
-                    height: 480
-                }}
-                imageSettings={coverImage}
-            />
+            {coverImage &&
+                <ProductCoverImage 
+                    dimensions={{
+                        width: 480,
+                        height: 480
+                    }}
+                    imageSettings={coverImage}
+                />
+            } 
             <ProductPageItemDescription 
                 product={{
                     name,

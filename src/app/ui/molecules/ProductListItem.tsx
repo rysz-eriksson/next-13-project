@@ -13,13 +13,15 @@ export const ProductListItem = (
         <li>
             <article>
                 <Link href={`/product/${id}`}>
-                    <ProductCoverImage
+                {coverImage &&
+                    <ProductCoverImage 
                         dimensions={{
                             width: 320,
                             height: 320
                         }}
-                        imageSettings={coverImage} 
+                        imageSettings={coverImage}
                     />
+                } 
                     <ProductListItemDescription 
                         product={{
                             category,

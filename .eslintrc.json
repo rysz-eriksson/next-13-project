@@ -12,7 +12,7 @@
 		"next/core-web-vitals",
 		"prettier"
 	],
-  "rules": {
+	"rules": {
 		// sort imports
 		"import/order": "error",
 
@@ -69,6 +69,14 @@
 		"@typescript-eslint/restrict-template-expressions": [
 			"error",
 			{ "allowNumber": true, "allowBoolean": true }
+		],
+
+		"no-restricted-imports": [
+			"error",
+			{
+				"name": "next/router",
+				"message": "Please use `next/navigation` instead."
+			}
 		]
 	},
 	"overrides": [
