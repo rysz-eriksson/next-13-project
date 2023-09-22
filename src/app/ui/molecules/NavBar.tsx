@@ -11,7 +11,22 @@ export const NavBar = () => {
         {
             name: "All",
             href: "/products",
-            exact: false
+            exact: true
+        },
+        {
+          name: "T-shirts",
+          href: "/products/t-shirts",
+          exact: false
+        },
+        {
+          name: "Hoodies",
+          href: "/products/hoodies",
+          exact: false
+        },
+        {
+          name: "Accessories",
+          href: "/products/accessories",
+          exact: false
         }
     ]
     return (
