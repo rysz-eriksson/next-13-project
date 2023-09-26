@@ -10715,6 +10715,15 @@ export type _SystemDateTimeFieldVariation =
   | 'combined'
   | 'localization';
 
+export type ProductGetByIdQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']['input']>;
+}>;
+
+
+export type ProductGetByIdQuery = { product?: { description: string, id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
+
+export type ProductItemFragment = { description: string, id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
+
 export type ProductListItemFragment = { id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
 
 export type ProductsGetByCategorySlugQueryVariables = Exact<{
@@ -10756,6 +10765,43 @@ export const ProductListItemFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductListItem"}) as unknown as TypedDocumentString<ProductListItemFragment, unknown>;
+export const ProductItemFragmentDoc = new TypedDocumentString(`
+    fragment ProductItem on Product {
+  ...ProductListItem
+  description
+}
+    fragment ProductListItem on Product {
+  id
+  name
+  price
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+}`, {"fragmentName":"ProductItem"}) as unknown as TypedDocumentString<ProductItemFragment, unknown>;
+export const ProductGetByIdDocument = new TypedDocumentString(`
+    query ProductGetById($id: ID) {
+  product(where: {id: $id}) {
+    ...ProductItem
+  }
+}
+    fragment ProductItem on Product {
+  ...ProductListItem
+  description
+}
+fragment ProductListItem on Product {
+  id
+  name
+  price
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+}`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     query ProductsGetByCategorySlug($slug: String!) {
   categories(where: {slug: $slug}) {

@@ -1,13 +1,18 @@
 import { ProductCoverImage } from "../atoms/ProductCoverImage"
 import { ProductPageItemDescription } from "../atoms/ProductPageItemDescription"
-import type { ProductItem } from "../types"
+import { type ProductItemFragment } from "@/gql/graphql"
 
 type ProductPageItemProps = {
-    product: ProductItem
+    product: ProductItemFragment
 }
 
 export const ProductPageItem = ({ product }: ProductPageItemProps) => {
-    const { name, category, price, description, coverImage } = product
+    const { name, categories, price, description, images } = product
+    const category = categories[0]?.name || ""
+    const coverImage = images[0] ? { 
+        src: images[0].url,
+        alt: name
+     }: null
     return (
         <article className="flex m-auto gap-6">
             {coverImage &&

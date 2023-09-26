@@ -1,0 +1,4 @@
+fragment ProductItem on Product {
+	...ProductListItem
+	description
+}

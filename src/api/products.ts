@@ -1,32 +1,6 @@
-import type { ProductItem } from "../app/ui/types";
 import { executeGraphql } from "./graphqlRequest";
-import { ProductsGetByCategorySlugDocument, ProductsGetListDocument } from "@/gql/graphql";
+import { ProductGetByIdDocument, type ProductItemFragment, ProductsGetByCategorySlugDocument, ProductsGetListDocument } from "@/gql/graphql";
 import { NUMBER_OF_PPRODUCTS } from "@/app/ui/constants";
-
-const PRODUCTS_API_URL = "https://naszsklep-api.vercel.app/api/products";
-
-type ProductResponseItem = {
-    id: string;
-    title: string;
-    price: number;
-    description: string;
-    image: string;
-    category: string;
-}
-
-const mapProductResponseToProductItem = (productResponse: ProductResponseItem): ProductItem => {
-    return {
-        id: productResponse.id,
-        name: productResponse.title,
-        category: productResponse.category,
-        price: productResponse.price,
-        coverImage: {
-            src: productResponse.image,
-            alt: productResponse.title,
-        },
-        description: productResponse.description,
-    }
-}
 
 export const getProductsList = async () => {
     const graphqlResponse = await executeGraphql(ProductsGetListDocument, {});
@@ -49,11 +23,7 @@ export const getProductsCount = async () => {
     // return productsResponse.length;
 }
 
-export const getProductById = async (id: ProductResponseItem["id"]) => {
-    const res = await fetch(`${PRODUCTS_API_URL}/${id}`);
-    const productResponse = (await res.json() as ProductResponseItem);
-    return mapProductResponseToProductItem(productResponse);
+export const getProductById = async (id: ProductItemFragment["id"]) => {
+    const graphqlResponse = await executeGraphql(ProductGetByIdDocument, {id});
+    return graphqlResponse.product
 }
-
-// https://naszsklep-api.vercel.app/api/products?take=20&offset=0
-// https://naszsklep-api.vercel.app/api/products/…ID…
