@@ -1,5 +1,4 @@
 import { PAGE_SIZE } from "./constants";
-import type { PaginationSettings } from "./types";
 
 export const formatPrice = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -12,10 +11,15 @@ export const computeNumberOfProductsPages = (totalItems: number, itemsPerPage: n
     return Math.ceil(totalItems / itemsPerPage);
 }
 
+export type PaginationSettings = {
+    amount: number;
+    offset: number;
+}
+
 export const computePaginationSettings = (currentPage: number): PaginationSettings => {
     const offset = (currentPage - 1) * PAGE_SIZE;
     return {
-        size: PAGE_SIZE,
+        amount: PAGE_SIZE,
         offset
     }
 }

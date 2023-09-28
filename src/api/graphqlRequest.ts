@@ -10,7 +10,10 @@ type GraphQlResponse<T> =
     errors: { message: string }[];
 };
 
-export const executeGraphql = async <TResult, TVariables>(query: TypedDocumentString<TResult, TVariables>, variables: TVariables): Promise<TResult> => {
+export const executeGraphql = async <TResult, TVariables>(query: TypedDocumentString<TResult, TVariables>, 
+    ...[variables]: TVariables extends Record<string, never>
+    ? []
+    : [TVariables]): Promise<TResult> => {
     if (!process.env.GRAPHQL_URL) {
         throw new Error("GRAPHQL_URL is not defined");
     }

@@ -1,12 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { type ProductItem } from "../types";
-
 type ProductCoverImageProps = {
     dimensions: {
         width: number
         height: number
     },
-    imageSettings: ProductItem["coverImage"]
+    imageSettings: {
+        src: string
+        alt: string
+    }
 }
 
 
