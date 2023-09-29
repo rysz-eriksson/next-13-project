@@ -6,10 +6,11 @@ type PagnationProps = {
     current: string;
     total: number;
     pageSize: number;
+    categoryPath: string
 }
 
 export const Pagination = (props: PagnationProps) => {
-    const { current, total, pageSize } = props;
+    const { current, total, pageSize, categoryPath } = props;
     const numberOfPages = computeNumberOfProductsPages(total, pageSize);
     const pagesList = generateProductPagesList(numberOfPages);
 
@@ -21,7 +22,7 @@ export const Pagination = (props: PagnationProps) => {
             <ActiveLink 
                 className="text-blue-400 hover:text-blue-600"
                 activeClassName="underline"
-                href={(`/products/${pageId}`) as Route}
+                href={(`/${categoryPath}/${pageId}`) as Route}
                 forceActive={current === pageId}
             >
                 {pageId}

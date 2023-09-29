@@ -10830,8 +10830,8 @@ export const ProductsCountDocument = new TypedDocumentString(`
     `) as unknown as TypedDocumentString<ProductsCountQuery, ProductsCountQueryVariables>;
 export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     query ProductsGetByCategorySlug($slug: String!, $amount: Int, $offset: Int) {
-  categories(where: {slug: $slug}, skip: $offset, first: $amount) {
-    products(first: 10) {
+  categories(where: {slug: $slug}) {
+    products(skip: $offset, first: $amount) {
       ...ProductListItem
     }
   }

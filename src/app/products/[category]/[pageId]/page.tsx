@@ -56,7 +56,7 @@ export default async function ProductsPage({params}: {params: ProductsPageParams
   return (
     <main className="flex flex-col items-center justify-center">
       <ProductList products={products} />
-      <Pagination current={params.pageId} total={productsCount} pageSize={PAGE_SIZE} /> 
+      <Pagination current={params.pageId} total={productsCount} pageSize={PAGE_SIZE} categoryPath={`products/${category}`} /> 
     </main>
  )
 }
