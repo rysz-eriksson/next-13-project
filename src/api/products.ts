@@ -1,10 +1,14 @@
 import { executeGraphql } from "./graphqlRequest";
 import { type PaginationSettings } from "@/app/ui/utils";
-import { ProductGetByIdDocument, type ProductItemFragment, ProductsGetByCategorySlugDocument, ProductsGetListDocument, ProductsCountDocument, ProductsPerCategoryCountDocument } from "@/gql/graphql";
-// import { NUMBER_OF_PPRODUCTS } from "@/app/ui/constants";
+import { ProductGetByIdDocument, type ProductItemFragment, ProductsGetByCategorySlugDocument, ProductsGetListDocument, ProductsCountDocument, ProductsPerCategoryCountDocument, ProductsGetFilteredListDocument } from "@/gql/graphql";
 
-export const getProductsList = async (paginationSettings: PaginationSettings) => {
+export const getProductsList = async (paginationSettings?: PaginationSettings) => {
     const graphqlResponse = await executeGraphql(ProductsGetListDocument, {...paginationSettings});
+    return graphqlResponse.products;
+};
+
+export const getProductsFilteredList = async (searchValue: string) => {
+    const graphqlResponse = await executeGraphql(ProductsGetFilteredListDocument, { search: searchValue });
     return graphqlResponse.products;
 };
 

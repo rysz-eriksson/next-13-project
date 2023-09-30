@@ -10740,6 +10740,13 @@ export type ProductsGetByCategorySlugQueryVariables = Exact<{
 
 export type ProductsGetByCategorySlugQuery = { categories: Array<{ products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> }> };
 
+export type ProductsGetFilteredListQueryVariables = Exact<{
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ProductsGetFilteredListQuery = { products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
 export type ProductsGetListQueryVariables = Exact<{
   amount?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -10847,6 +10854,23 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     url
   }
 }`) as unknown as TypedDocumentString<ProductsGetByCategorySlugQuery, ProductsGetByCategorySlugQueryVariables>;
+export const ProductsGetFilteredListDocument = new TypedDocumentString(`
+    query ProductsGetFilteredList($search: String) {
+  products(where: {name_contains: $search}) {
+    ...ProductListItem
+  }
+}
+    fragment ProductListItem on Product {
+  id
+  name
+  price
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+}`) as unknown as TypedDocumentString<ProductsGetFilteredListQuery, ProductsGetFilteredListQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList($amount: Int, $offset: Int) {
   products(skip: $offset, first: $amount) {

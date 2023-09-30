@@ -19,6 +19,7 @@ const documents = {
     "fragment ProductListItem on Product {\n  id\n  name\n  price\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n}": types.ProductListItemFragmentDoc,
     "query ProductsCount {\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsCountDocument,
     "query ProductsGetByCategorySlug($slug: String!, $amount: Int, $offset: Int) {\n  categories(where: {slug: $slug}) {\n    products(skip: $offset, first: $amount) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
+    "query ProductsGetFilteredList($search: String) {\n  products(where: {name_contains: $search}) {\n    ...ProductListItem\n  }\n}": types.ProductsGetFilteredListDocument,
     "query ProductsGetList($amount: Int, $offset: Int) {\n  products(skip: $offset, first: $amount) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
     "query ProductsPerCategoryCount($slug: String!) {\n  productsConnection(where: {categories_some: {slug: $slug}}) {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsPerCategoryCountDocument,
 };
@@ -43,6 +44,10 @@ export function graphql(source: "query ProductsCount {\n  productsConnection {\n
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ProductsGetByCategorySlug($slug: String!, $amount: Int, $offset: Int) {\n  categories(where: {slug: $slug}) {\n    products(skip: $offset, first: $amount) {\n      ...ProductListItem\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByCategorySlugDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query ProductsGetFilteredList($search: String) {\n  products(where: {name_contains: $search}) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetFilteredListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

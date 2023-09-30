@@ -1,0 +1,5 @@
+query ProductsGetFilteredList($search: String) {
+	products(where: { name_contains: $search }) {
+		...ProductListItem
+	}
+}

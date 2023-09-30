@@ -1,4 +1,4 @@
-export default function ProductsLayout({
+export default function ProductsListLayout({
     children,
   }: {
     children: React.ReactNode
@@ -9,4 +9,3 @@ export default function ProductsLayout({
         </section>
     )
   }
-  
