@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProductById } from "@/api/products"
-import { ProductPageItem } from "@/app/ui/molecules/ProductPageItem"
+import { ProductPageItem } from "@/app/ui/organisms/ProductPageItem"
 
 export async function generateMetadata({params}: {params: {productId: string}}): Promise<Metadata> {
 	

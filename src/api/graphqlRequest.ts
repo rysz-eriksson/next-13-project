@@ -30,6 +30,8 @@ export const executeGraphql = async <TResult, TVariables>(query: TypedDocumentSt
     
         const graphqlResponse = (await res.json()) as GraphQlResponse<TResult>;
         if (graphqlResponse.errors) {
+            console.dir(graphqlResponse.errors)
+            console.log("query", query);
             throw new Error(`GraphQl Error`, {
                 cause: graphqlResponse.errors,
             });

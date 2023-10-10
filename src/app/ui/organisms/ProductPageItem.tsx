@@ -1,5 +1,6 @@
 import { ProductCoverImage } from "../atoms/ProductCoverImage"
 import { ProductPageItemDescription } from "../atoms/ProductPageItemDescription"
+import { AddToCartForm } from "../molecules/AddToCartForm"
 import { type ProductItemFragment } from "@/gql/graphql"
 
 type ProductPageItemProps = {
@@ -7,7 +8,7 @@ type ProductPageItemProps = {
 }
 
 export const ProductPageItem = ({ product }: ProductPageItemProps) => {
-    const { name, categories, price, description, images } = product
+    const { id, name, categories, price, description, images } = product
     const category = categories[0]?.name || ""
     const coverImage = images[0] ? { 
         src: images[0].url,
@@ -23,7 +24,8 @@ export const ProductPageItem = ({ product }: ProductPageItemProps) => {
                     }}
                     imageSettings={coverImage}
                 />
-            } 
+            }
+            <section>
             <ProductPageItemDescription 
                 product={{
                     name,
@@ -31,7 +33,9 @@ export const ProductPageItem = ({ product }: ProductPageItemProps) => {
                     price,
                     description
                 }}
-            />
+                />
+                <AddToCartForm product={{id, price}} />
+            </section>
         </article>
     )
 }

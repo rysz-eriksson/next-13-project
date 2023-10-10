@@ -7,6 +7,11 @@ type ProductPageItemDescriptionProps = {
 
 export const ProductPageItemDescription = (
     { product: {name, category, price, description}}: ProductPageItemDescriptionProps) => {
+
+        async function addProductToCartAction() {
+            "use server";
+            console.log(`add product ${name} to cart`);
+        }
     return (
         <div className="mt-2 flex flex-col justify-evenly max-w-lg max-h-80">
                 <h3 className="text-sm font-semibold text-gray-700">
