@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { formatPrice } from "../ui/utils";
-import { CartGetByIdDocument } from "@/gql/graphql";
-import { executeGraphql } from "@/api/graphqlRequest";
+import { ProductQuantity } from "../ui/atoms/ProductQuantity";
+import { getCartById } from "@/api/cart";
  
 export default async function CartPage() {
 	const cartId = cookies().get("cartId")?.value;
@@ -10,10 +10,8 @@ export default async function CartPage() {
 	if (!cartId) {
 		redirect("/");
 	}
- 
-	const { order: cart } = await executeGraphql(CartGetByIdDocument, {
-		id: cartId,
-	});
+
+	const cart = await getCartById(cartId);
  
 	if (!cart) {
 		redirect("/");
@@ -38,7 +36,9 @@ export default async function CartPage() {
 						return (
 							<tr key={item.product.id}>
 								<td>{item.product.name}</td>
-								<td>{item.quantity}</td>
+								<td>
+									<ProductQuantity itemId={item.id} quantity={item.quantity}/>
+								</td>
 								<td>{formatPrice(item.product.price)}</td>
 							</tr>
 						);
